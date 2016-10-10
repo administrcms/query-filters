@@ -40,6 +40,8 @@ abstract class Filter
         $this->builder = $builder;
 
         foreach ($this->request->all() as $name => $value) {
+            $name = camel_case($name);
+
             if (! method_exists($this, $name)) {
                 continue;
             }
