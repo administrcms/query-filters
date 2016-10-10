@@ -39,7 +39,7 @@ abstract class Filter
     {
         $this->builder = $builder;
 
-        foreach ($this->filters() as $name => $value) {
+        foreach ($this->request->all() as $name => $value) {
             if (! method_exists($this, $name)) {
                 continue;
             }
@@ -48,15 +48,5 @@ abstract class Filter
         }
 
         return $this->builder;
-    }
-
-    /**
-     * Get all request filters data.
-     *
-     * @return array
-     */
-    public function filters()
-    {
-        return $this->request->all();
     }
 }
