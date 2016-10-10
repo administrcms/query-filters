@@ -1,0 +1,11 @@
+<?php
+
+namespace DummyNamespace;
+
+use Administr\QueryFilters;
+use Illuminate\Database\Eloquent\Builder;
+
+class DummyClass extends Filter
+{
+    // TODO Define your methods. Each method corresponds to the query param. Your method will receive the value from the param, if present.
+}

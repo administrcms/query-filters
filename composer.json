@@ -1,0 +1,19 @@
+{
+    "name": "administrcms/query-filters",
+    "description": "Query filters for an Eloquent model",
+    "authors": [
+        {
+            "name": "Miroslav Vitanov",
+            "email": "mvvitanov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": ">=5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Administr\\QueryFilters\\": "src/"
+        }
+    }
+}
