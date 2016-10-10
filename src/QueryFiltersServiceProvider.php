@@ -2,7 +2,6 @@
 
 namespace Administr\QueryFilters;
 
-
 use Administr\QueryFilters\Commands\MakeQueryFilter;
 use Illuminate\Support\ServiceProvider;
 
