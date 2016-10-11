@@ -22,6 +22,14 @@ abstract class Filter
     protected $builder;
 
     /**
+     * Specify method names, which should be run
+     * even when the value is with length of 0.
+     *
+     * @var array
+     */
+    protected $alwaysRun = [];
+
+    /**
      * @param Request $request
      */
     public function __construct(Request $request)
@@ -43,6 +51,10 @@ abstract class Filter
             $name = camel_case($name);
 
             if (! method_exists($this, $name)) {
+                continue;
+            }
+
+            if(! $this->shouldRunMethod($name, $value)) {
                 continue;
             }
 
@@ -84,5 +96,15 @@ abstract class Filter
         }
 
         return $builder;
+    }
+
+    /**
+     * @param $method
+     * @param $value
+     * @return bool
+     */
+    protected function shouldRunMethod($method, $value)
+    {
+        return in_array($method, $this->alwaysRun) || strlen($value) > 0;
     }
 }
