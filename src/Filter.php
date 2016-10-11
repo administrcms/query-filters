@@ -115,6 +115,11 @@ abstract class Filter
      */
     protected function shouldRunMethod($method, $value)
     {
-        return in_array($method, $this->alwaysRun) || strlen($value) > 0;
+        return
+            in_array($method, $this->alwaysRun)
+            ||
+            (is_string($value) && strlen($value) > 0)
+            ||
+            (is_array($value) && count($value) > 0);
     }
 }
