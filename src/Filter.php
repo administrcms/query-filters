@@ -47,7 +47,7 @@ abstract class Filter
     {
         $this->builder = $builder;
 
-        foreach ($this->request->all() as $name => $value) {
+        foreach ($this->filters() as $name => $value) {
             $name = camel_case($name);
 
             if (! method_exists($this, $name)) {
@@ -96,6 +96,16 @@ abstract class Filter
         }
 
         return $builder;
+    }
+
+    /**
+     * Allow for easier extensibility of the filters.
+     *
+     * @return array
+     */
+    protected function filters()
+    {
+        return $this->request->all();
     }
 
     /**
