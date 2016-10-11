@@ -61,3 +61,17 @@ class LessonsController extends Controller
     }
 }
 ```
+
+# [ListView](https://github.com/administrcms/listview) sorting
+
+By default the base Filter class will handle the sorting for your main table. If you have a ListView that uses a column which is a relationship to the model, you'll have to handle that column for yourself. Let's imagine that you have User model and it has a relationship to UserType (one User has one UserType). So in your ListView you want to sort by the column that shows the name of the UserType. We'll assume that the column in the ListView is defined as `type.name`. In that case you need to define the custom sort like this:
+
+```php
+public function sortTypeName($dir)
+{
+    return $this
+        ->builder
+        ->join('user_types', 'user_types.id', '=', 'users.type_id')
+        ->orderBy('user_types.id', $dir);
+}
+```
