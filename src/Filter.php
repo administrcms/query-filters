@@ -105,7 +105,17 @@ abstract class Filter
      */
     protected function filters()
     {
-        return $this->request->all();
+        $filters = array_dot($this->request->all());
+
+        foreach($filters as $filter => $value) {
+            unset($filters[$filter]);
+
+            $filter = studly_case(str_replace('.', '_', $filter));
+
+            $filters[$filter] = $value;
+        }
+
+        return $filters;
     }
 
     /**
