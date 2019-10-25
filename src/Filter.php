@@ -4,6 +4,8 @@ namespace Administr\QueryFilters;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 abstract class Filter
 {
@@ -84,7 +86,7 @@ abstract class Filter
             $builder = $this->builder;
 
             // Convert to method for sorting - sortId, sortName, sortFirstName ...
-            $method = 'sort' . studly_case(str_replace('.', '_', $field));
+            $method = 'sort' . Str::studly(str_replace('.', '_', $field));
 
             // If it is not a method, then try to do the orderBy query for the field
             if(! method_exists($this, $method)) {
@@ -105,12 +107,12 @@ abstract class Filter
      */
     protected function filters()
     {
-        $filters = array_dot($this->request->all());
+        $filters = Arr::dot($this->request->all());
 
         foreach($filters as $filter => $value) {
             unset($filters[$filter]);
 
-            $filter = studly_case(str_replace('.', '_', $filter));
+            $filter = Str::studly(str_replace('.', '_', $filter));
 
             $filters[$filter] = $value;
         }
