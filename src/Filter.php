@@ -50,7 +50,7 @@ abstract class Filter
         $this->builder = $builder;
 
         foreach ($this->filters() as $name => $value) {
-            $name = camel_case($name);
+            $name = Str::camel($name);
 
             if (! method_exists($this, $name)) {
                 continue;
